@@ -4,27 +4,31 @@ import java.sql.*;
 import java.util.ArrayList;
 import java.util.List;
 
-public class SqlConnectionImpl implements SqlConnectionInterface {
+public class SqlConnectionImpl  {
 
     private static SqlConnectionImpl instance = null;
     private Connection connection = null;
-    @Override
+
     public Connection connect() {
 
         int retries =10;
         for(int i =0; i < retries; i++){
             try {
                 connection = DriverManager.getConnection("jdbc:mysql://db:3306/world?useSSL=false", "root", "Semgroup16");
+                Thread.sleep(10000);
                 break;
             } catch (SQLException e) {
                 System.out.println(e.getMessage());
+            }
+            catch (Exception e){
+                System.out.println(e);
             }
 
         }
         return  connection;
     }
 
-    @Override
+
     public List<String> command(String command) {
 
         List<String> serverResponse = new ArrayList<>();
@@ -57,8 +61,6 @@ public class SqlConnectionImpl implements SqlConnectionInterface {
         }
     return serverResponse;
     }
-
-    @Override
     public void CloseConnection() {
 
     }
