@@ -27,7 +27,7 @@ public class App {
                 // Wait a bit for db to start
                 Thread.sleep(30000);
                 // Connect to database
-                con = DriverManager.getConnection("jdbc:mysql://db:3306/world?useSSL=false", "root", "example");
+                con = DriverManager.getConnection("jdbc:mysql://db:3306/world?useSSL=false", "root", "Semgroup16");
                 System.out.println("Successfully connected");
                 break;
             } catch (SQLException sqle) {
@@ -72,7 +72,7 @@ public class App {
 
         try {
             Statement stmt = a.con.createStatement();
-            ResultSet rset = stmt.executeQuery("SELECT name FROM city");
+            ResultSet rset = stmt.executeQuery("SELECT name,population FROM city JOIN country ON city.CountryCode = country.Code WHERE Population > 100000 ORDER BY Population");
             while(rset.next()){
                 System.out.println(rset.getString("name"));
             }
