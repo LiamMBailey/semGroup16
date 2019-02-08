@@ -14,7 +14,8 @@ public class SqlConnectionImpl  {
         int retries =10;
         for(int i =0; i < retries; i++){
             try {
-                connection = DriverManager.getConnection("jdbc:mysql://db:3306/world?useSSL=false", "root", "Semgroup16");
+                connection = DriverManager.getConnection("jdbc:mysql://db:3306/employees?useSSL=false", "root", "Semgroup16");
+                System.out.println("Connection Established");
                 Thread.sleep(10000);
                 break;
             } catch (SQLException e) {
