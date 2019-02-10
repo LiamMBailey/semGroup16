@@ -1,9 +1,7 @@
 package com.napier.sem;
 
+import java.io.Console;
 import java.sql.*;
-import java.util.ArrayList;
-import java.util.List;
-import java.util.Scanner;
 
 public class App {
 
@@ -71,6 +69,7 @@ public class App {
         App a = new App();
         a.connect();
 
+        /*
         try {
             Statement stmt = a.con.createStatement();
             ResultSet rset = stmt.executeQuery("SELECT city.name,city.population FROM city JOIN country ON city.CountryCode = country.Code WHERE city.population > 100000 ORDER BY city.population");
@@ -81,13 +80,48 @@ public class App {
             System.out.println(e);
         }
         System.out.println("Operation successful");
+        */
 
-        //Input Test
-        Scanner scanner = new Scanner(System.in);
-        System.out.print("Enter your age: ");
-        String age = scanner.nextLine();
-        System.out.println(age);
 
+
+        String input = "";
+        Console console = System.console();
+
+        while(!input.equals("EXIT")){
+            System.out.println("Enter SQL statement(EXIT to finish)");
+            input = console.readLine();
+
+            if(input.equals("EXIT")){
+                System.out.println("App closing");
+                continue;
+            }
+            else {
+                try {
+                    /**
+                    * Based on https://stackoverflow.com/questions/24229442/java-print-the-data-in-resultset
+                    * Answer by Zeb 27/01/2015
+                     *
+                     * Print data row after row in format "record1 column_name1, record2 column_name2,(...)"
+                    * */
+                    Statement statement = a.con.createStatement();
+                    ResultSet resultSet = statement.executeQuery(input);
+                    ResultSetMetaData rsmd = resultSet.getMetaData();
+                    int columnsNumber = rsmd.getColumnCount();
+                    while (resultSet.next()) {
+                        for (int i = 1; i <= columnsNumber; i++) {
+                            if (i > 1) System.out.print(",  ");
+                            String columnValue = resultSet.getString(i);
+                            System.out.print(columnValue + " " + rsmd.getColumnName(i));
+                        }
+                        System.out.println("");
+                    }
+                    System.out.println("Operation successful");
+                } catch (Exception e) {
+                    System.out.println(e);
+                    System.out.println("Operation failed");
+                }
+            }
+        }
 
 
 
