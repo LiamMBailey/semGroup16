@@ -3,6 +3,7 @@ package com.napier.sem;
 import java.sql.*;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Scanner;
 
 public class App {
 
@@ -72,7 +73,7 @@ public class App {
 
         try {
             Statement stmt = a.con.createStatement();
-            ResultSet rset = stmt.executeQuery("SELECT name,population FROM city JOIN country ON city.CountryCode = country.Code WHERE Population > 100000 ORDER BY Population");
+            ResultSet rset = stmt.executeQuery("SELECT city.name,city.population FROM city JOIN country ON city.CountryCode = country.Code WHERE city.population > 100000 ORDER BY city.population");
             while(rset.next()){
                 System.out.println(rset.getString("name"));
             }
@@ -80,6 +81,15 @@ public class App {
             System.out.println(e);
         }
         System.out.println("Operation successful");
+
+        //Input Test
+        Scanner scanner = new Scanner(System.in);
+        System.out.print("Enter your age: ");
+        String age = scanner.nextLine();
+        System.out.println(age);
+
+
+
 
     }
 
