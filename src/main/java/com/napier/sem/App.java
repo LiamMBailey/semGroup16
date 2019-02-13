@@ -9,13 +9,15 @@ public class App {
 
 
         SqlServerConnection sql = SqlServerConnection.getInstance();
-       // Console console = System.console();
+        Console console = System.console();
         String sqlStatement;
-
+        do {
             System.out.print("Please enter the SQL command: ");
-          //  sqlStatement = console.readLine();
-            List<String> serverResponse = sql.command("Select name FROM city");
+            sqlStatement = console.readLine();
+            List<String> serverResponse = sql.command(sqlStatement);
             serverResponse.forEach(System.out::println);
+        }
+        while (!sqlStatement.equals("exit"));
 
     }
 

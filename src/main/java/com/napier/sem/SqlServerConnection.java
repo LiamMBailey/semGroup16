@@ -4,10 +4,18 @@ import java.sql.*;
 import java.util.ArrayList;
 import java.util.List;
 
+/*
+* SQL SERVER SINGLETON CLASS
+* CONNECTS TO DOCKER DB
+ */
 public class SqlServerConnection {
     private static SqlServerConnection instance = null;
     private Connection con = null;
 
+    /* Automatically called on startup by the private constructor
+    * Establishes the connection with the docker MYSQL DB
+    * Access level public as connection may need to be terminated and recreated
+    */
     public void connect() {
         try {
             // Load Database driver
@@ -17,6 +25,7 @@ public class SqlServerConnection {
             System.exit(-1);
         }
 
+        //Loops 10 times to establish the connection, throws error if it still cant connect
         int retries = 10;
         for (int i = 0; i < retries; ++i) {
             System.out.println("Connecting to database...");
@@ -36,6 +45,9 @@ public class SqlServerConnection {
         }
     }
 
+    /* A method to gracefully terminate the connection with the Connection
+     * Access level public as connection may need to be terminated and recreated
+     */
     public void Disconnect() {
         if (con != null) {
             try {
@@ -47,6 +59,10 @@ public class SqlServerConnection {
         }
     }
 
+     /* A method that takes in a string which is a SQL statement
+     * Then the SQL server is called with the given SQL statement
+     * Returns an Arraylist of String
+     */
     public List<String> command(String sql){
 
         List<String> serverResponse = new ArrayList<>();
@@ -57,18 +73,19 @@ public class SqlServerConnection {
             ResultSetMetaData rsmd = rs.getMetaData();
             StringBuilder sqlColumns = new StringBuilder();
 
-            for(int i =1; i < rsmd.getColumnCount(); i++){
-
+            //Append the column names to the list that is returned
+            for(int i =0; i < rsmd.getColumnCount(); i++){
                 if(!sqlColumns.toString().equals("")){
                     sqlColumns.append(",");
                 }
-                sqlColumns.append(rsmd.getColumnLabel(i));
+                sqlColumns.append(rsmd.getColumnLabel(i+1));
 
 
             }
 
             serverResponse.add(sqlColumns.toString());
 
+            //Appends each row returned by the server to the list that is to be returned
             while (rs.next()){
                StringBuilder tempResult = new StringBuilder();
 
@@ -76,7 +93,7 @@ public class SqlServerConnection {
                    if(!tempResult.toString().equals("")){
                        tempResult.append(",");
                    }
-                   tempResult.append(rs.getString(i));
+                   tempResult.append(rs.getString(i+1));
                }
                serverResponse.add(tempResult.toString());
             }
@@ -94,6 +111,7 @@ public class SqlServerConnection {
         connect();
     }
 
+    //A method to get the instance of the singleton class
     public static SqlServerConnection getInstance(){
         if (instance == null){
             instance = new SqlServerConnection();
