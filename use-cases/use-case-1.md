@@ -1,10 +1,10 @@
-# USE CASE: 1 As a product owner I want to produce a report of Languages so that I can produce a report of the popularity of a language.
+# USE CASE: 1 As a Data analyst I want to produce a report of Languages so that I can produce a report of the popularity of a language.
 
 ## CHARACTERISTIC INFORMATION
 
 ### Goal in Context
 
-As an *Product owner* I want to produce a report of Languages so that I can produce a report of the popularity of a language. 
+As an *Data analyst* I want to produce a report of Languages so that I can produce a report of the popularity of a language. 
 
 ### Scope
 
@@ -28,7 +28,7 @@ No report is produced.
 
 ### Primary Actor
 
-Product Owner.
+Data analyst.
 
 ### Trigger
 
@@ -37,14 +37,14 @@ A request for language information is set out for the team.
 ## MAIN SUCCESS SCENARIO
 
 1. task request language information for a given country.
-2. Product owner captures name of the language to get information for.
-3. Product owner extracts current Langauage information of all countries of the given language.
-4. Product owner provides report to Lab review.
+2. Data analyst captures name of the language to get information for.
+3. Data analyst extracts current Langauage information of all countries of the given language.
+4. Data analyst provides report to Lab review.
 
 ## EXTENSIONS
 
 3. **language does not exist**:
-    1. Product owner informs team no language exists.
+    1. Data analyst informs team no language exists.
 
 ## SUB-VARIATIONS
 

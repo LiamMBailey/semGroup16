@@ -1,6 +1,6 @@
 @startuml
 
-actor HR as "HR Advisor"
+actor HR as "Data analyst"
 
 rectangle Database
 
