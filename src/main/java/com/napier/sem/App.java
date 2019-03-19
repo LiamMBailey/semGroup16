@@ -9,7 +9,7 @@ public class App {
 
 
         SqlServerConnection sql = new SqlServerConnection();
-        sql.connect("db:3306");
+        sql.connect("localhost:33060");
         Console console = System.console();
         String sqlStatement;
         do {
