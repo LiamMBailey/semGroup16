@@ -9,14 +9,13 @@ import java.util.List;
 * CONNECTS TO DOCKER DB
  */
 public class SqlServerConnection {
-    private static SqlServerConnection instance = null;
     private Connection con = null;
 
     /* Automatically called on startup by the private constructor
     * Establishes the connection with the docker MYSQL DB
     * Access level public as connection may need to be terminated and recreated
     */
-    public void connect() {
+    public void connect(String location) {
         try {
             // Load Database driver
             Class.forName("com.mysql.jdbc.Driver");
@@ -33,7 +32,7 @@ public class SqlServerConnection {
                 // Wait a bit for db to start
                 Thread.sleep(30000);
                 // Connect to database
-                con = DriverManager.getConnection("jdbc:mysql://db:3306/world?useSSL=false", "root", "Semgroup16");
+                con = DriverManager.getConnection("jdbc:mysql://"+location+"/world?allowPublicKeyRetrieval=true&useSSL=false", "root", "Semgroup16");
                 System.out.println("Successfully connected");
                 break;
             } catch (SQLException sqle) {
@@ -111,16 +110,9 @@ public class SqlServerConnection {
         return serverResponse;
     }
 
-    private SqlServerConnection(){
-        connect();
+    public SqlServerConnection(){
+
     }
 
-    //A method to get the instance of the singleton class
-    public static SqlServerConnection getInstance(){
-        if (instance == null){
-            instance = new SqlServerConnection();
-        }
-        return instance;
-    }
 
 }
