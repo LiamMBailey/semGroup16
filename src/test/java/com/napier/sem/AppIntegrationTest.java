@@ -12,6 +12,7 @@ public class AppIntegrationTest {
     static void init()
     {
         sql = new SqlServerConnection();
+        sql.connect("localhost:33060");
 
     }
 
@@ -23,7 +24,22 @@ public class AppIntegrationTest {
 
         //act
         actual = sql.command("Select name FROM city where name='Edinburgh'");
-        String actualCity = actual.get(0);
+        String actualCity = actual.get(1);
+
+        //assert
+        assertEquals(actualCity,expected);
+
+    }
+
+    @Test
+    void getCountryTest(){
+        //arrange
+        List<String> actual;
+        String expected = "Germany";
+
+        //act
+        actual = sql.command("Select name FROM country where name='Germany'");
+        String actualCity = actual.get(1);
 
         //assert
         assertEquals(actualCity,expected);
