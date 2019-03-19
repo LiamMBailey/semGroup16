@@ -7,7 +7,6 @@ public class App {
 
     public static void main(String[] args) {
 
-
         SqlServerConnection sql = SqlServerConnection.getInstance();
         Console console = System.console();
         String sqlStatement;
