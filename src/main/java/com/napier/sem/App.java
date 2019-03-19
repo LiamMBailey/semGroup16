@@ -8,7 +8,8 @@ public class App {
     public static void main(String[] args) {
 
 
-        SqlServerConnection sql = SqlServerConnection.getInstance();
+        SqlServerConnection sql = new SqlServerConnection();
+        sql.connect("db:3306");
         Console console = System.console();
         String sqlStatement;
         do {
