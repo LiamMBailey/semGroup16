@@ -10,8 +10,6 @@ services:
   db:
     build: db/.
     command: --default-authentication-plugin=mysql_native_password
-    ports:
-      - 8083:3306
     restart: always
     environment:
       MYSQL_ROOT_PASSWORD: Semgroup16
