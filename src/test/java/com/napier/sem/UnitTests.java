@@ -21,8 +21,15 @@ class UnitTests
     @Test
    void sqlStatementTestNull(){
 
+        //arrange
+        List<String> actual;
+
         //assert
-        sql.command(null);
+       actual = sql.command(null);
+
+       //act
+        assertEquals(actual, null);
 
     }
+
 }
