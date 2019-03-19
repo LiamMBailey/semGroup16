@@ -17,6 +17,9 @@ public class App {
             serverResponse.forEach(System.out::println);
         }
         while (!sqlStatement.equals("exit"));
+        if(sqlStatement.equals("exit")){
+            
+        }
 
     }
 

@@ -67,6 +67,10 @@ public class SqlServerConnection {
 
         List<String> serverResponse = new ArrayList<>();
         Statement stmt = null;
+
+        if(sql.equals(null)){
+            return serverResponse;
+        }
         try{
             stmt = con.createStatement();
             ResultSet rs = stmt.executeQuery(sql);
