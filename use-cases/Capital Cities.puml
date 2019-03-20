@@ -1,0 +1,18 @@
+@startuml
+
+actor HR as "Data analyst"
+
+rectangle Database
+
+rectangle "Capital Cities" {
+    usecase UC4 as "Get Capital Cities
+    by country in world"
+
+    usecase UCa as "Print Capital Cities"
+
+    HR - UC4
+    UC4 ..> UCa : include
+    UC4 - Database
+}
+
+@enduml

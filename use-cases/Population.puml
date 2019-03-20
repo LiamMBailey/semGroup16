@@ -1,0 +1,18 @@
+@startuml
+
+actor HR as "Data analyst"
+
+rectangle Database
+
+rectangle "Population" {
+    usecase UC4 as "Get population
+    by quantity in world"
+
+    usecase UCa as "Print population"
+
+    HR - UC4
+    UC4 ..> UCa : include
+    UC4 - Database
+}
+
+@enduml
