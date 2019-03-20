@@ -57,7 +57,7 @@ public class RequirementsSQL {
         String sqlStr = null;
         switch (index){
             case 1:
-                sqlStr = "SELECT "+ countryFields + "FROM COUNTRY ORDER BY Population DESC";
+                sqlStr = "SELECT Code, Name, Continent, Region, Population, Capital FROM country ORDER BY Population DESC";
                 break;
 
         }

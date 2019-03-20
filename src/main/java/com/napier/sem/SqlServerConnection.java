@@ -77,16 +77,15 @@ public class SqlServerConnection {
             StringBuilder sqlColumns = new StringBuilder();
 
             //Append the column names to the list that is returned
+            /*
             for(int i =0; i < rsmd.getColumnCount(); i++){
                 if(!sqlColumns.toString().equals("")){
                     sqlColumns.append(",");
                 }
                 sqlColumns.append(rsmd.getColumnLabel(i+1));
-
-
             }
-
             serverResponse.add(sqlColumns.toString());
+            */
 
             //Appends each row returned by the server to the list that is to be returned
             while (rs.next()){
@@ -94,7 +93,7 @@ public class SqlServerConnection {
 
                for(int i = 0; i <rsmd.getColumnCount(); i++){
                    if(!tempResult.toString().equals("")){
-                       tempResult.append(",");
+                       tempResult.append("::");
                    }
                    tempResult.append(rs.getString(i+1));
                }

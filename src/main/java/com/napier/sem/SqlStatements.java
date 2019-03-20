@@ -14,7 +14,7 @@ public class SqlStatements {
         }
         for (String country: SqlReturn) {
 
-           String[] countrySplit =  country.split(",");
+           String[] countrySplit =  country.split("::");
            String code = countrySplit[0];
            String name = countrySplit[1];
            String continent = countrySplit[2];

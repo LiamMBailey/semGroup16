@@ -24,7 +24,7 @@ public class App {
                 System.out.println(requirementsList.indexOf(s) + 1 + ") " + s);
             }
             System.out.print("\nSelect Report to be Generated, (or 0 to exit): ");
-            index = sc.nextInt() - 1;
+            index = sc.nextInt();
             System.out.print("If applicable, enter the value for N: ");
             n = sc.nextInt();
 
