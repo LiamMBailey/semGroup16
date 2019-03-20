@@ -27,4 +27,45 @@ public class SqlStatements {
         }
         return countries;
     }
+
+    public List<City> cityReport(List<String> SqlReturn)
+    {
+        List<City> cities = new ArrayList<>();
+        if(SqlReturn == null)
+        {
+            return null;
+        }
+        for (String city: SqlReturn) {
+
+            String[] citySplit =  city.split(",");
+            String name = citySplit[0];
+            String country = citySplit[1];
+            String district = citySplit[2];
+            int population = Integer.parseInt(citySplit[3]);
+            City tempCity = new City(name,country,district,population);
+
+            cities.add(tempCity);
+        }
+        return cities;
+    }
+
+    public List<CapitalCity> capitalCityReport(List<String> SqlReturn)
+    {
+        List<CapitalCity> capitalCities = new ArrayList<>();
+        if(SqlReturn == null)
+        {
+            return null;
+        }
+        for (String capitalCity: SqlReturn) {
+
+            String[] capitalCitySplit =  capitalCity.split(",");
+            String name = capitalCitySplit[0];
+            String country = capitalCitySplit[1];
+            int population = Integer.parseInt(capitalCitySplit[2]);
+            CapitalCity tempCapitalCity = new CapitalCity(name,country,population);
+
+            capitalCities.add(tempCapitalCity);
+        }
+        return capitalCities;
+    }
 }
