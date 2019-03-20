@@ -21,9 +21,7 @@ public class Country {
 
     }
 
-    public String getCountryCode() {
-        return countryCode;
-    }
+    public String getCountryCode() { return countryCode; }
 
     public void setCountryCode(String countryCode) {
         this.countryCode = countryCode;
@@ -69,6 +67,9 @@ public class Country {
         this.countryCapital = countryCapital;
     }
 
+    public String toString(){
+        return String.format("%s , %s , %s , %s , %s , %s", getCountryCode(), getCountryName(), getCountryContinent(), getCountryRegion(),getCountryPopulation(),getCountryCapital());
+    }
 
 
 }

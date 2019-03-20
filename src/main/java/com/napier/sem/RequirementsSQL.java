@@ -8,8 +8,6 @@ import java.util.List;
 
 public class RequirementsSQL {
 
-
-    static SqlServerConnection sql;
     public  List<String> reportRequirements() {
 
         BufferedReader br = null;
@@ -59,7 +57,7 @@ public class RequirementsSQL {
         String sqlStr = null;
         switch (index){
             case 1:
-                sqlStr = "Select "+ countryFields + "FROM COUNTRY ORDER BY Population DESC";
+                sqlStr = "SELECT "+ countryFields + "FROM COUNTRY ORDER BY Population DESC";
                 break;
 
         }
@@ -67,9 +65,5 @@ public class RequirementsSQL {
         return sqlStr;
     }
 
-    public RequirementsSQL(){
-        sql = new SqlServerConnection();
-        sql.connect("localhost:33060");
-    }
 
 }
