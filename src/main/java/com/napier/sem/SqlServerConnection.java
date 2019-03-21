@@ -1,7 +1,5 @@
 package com.napier.sem;
 
-import com.sun.istack.internal.NotNull;
-
 import java.sql.*;
 import java.util.ArrayList;
 import java.util.List;
