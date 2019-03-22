@@ -1,4 +1,4 @@
-package com.napier.sem;
+package com.napier.sem.sqlserver;
 
 import java.io.BufferedReader;
 import java.io.FileReader;

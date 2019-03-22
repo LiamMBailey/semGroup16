@@ -1,8 +1,8 @@
 package com.napier.sem;
+import com.napier.sem.sqlserver.SqlServerConnection;
 import org.junit.jupiter.api.BeforeAll;
 import org.junit.jupiter.api.Test;
 
-import java.util.ArrayList;
 import java.util.List;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
@@ -25,7 +25,7 @@ public class AppIntegrationTest {
         String expected = "Edinburgh";
 
         //act
-        actual = sql.command("Select name FROM city where name='Edinburgh'");
+        actual = sql.command("Select name FROM city where name='Edinburgh'", "city");
         String actualCity = actual.get(1);
 
         //assert
@@ -40,7 +40,7 @@ public class AppIntegrationTest {
         String expected = "Germany";
 
         //act
-        actual = sql.command("Select name FROM country where name='Germany'");
+        actual = sql.command("Select name FROM country where name='Germany'","City");
         String actualCity = actual.get(1);
 
         //assert
