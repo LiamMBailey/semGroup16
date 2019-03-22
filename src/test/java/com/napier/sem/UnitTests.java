@@ -16,6 +16,12 @@ import static org.junit.jupiter.api.Assertions.*;
 class UnitTests {
 
 
+    @Test
+    void run_app_null_test(){
+        //arrange
+
+        assertEquals(5,5);
+    }
 
 
 }

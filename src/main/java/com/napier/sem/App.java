@@ -10,31 +10,39 @@ import java.util.Scanner;
 public class App {
 
     public static void main(String[] args) {
+      App a = new App();
+      a.run_app();
 
+    }
+    public int run_app(){
+        try{
+            Scanner sc = new Scanner(System.in);
+            int index = 0;
+            int n = 0;
+            boolean exit = false;
+            RequirementsSQL requirements = new RequirementsSQL();
+            List<String> requirementsList;
+            requirementsList = requirements.reportRequirements();
+            SqlServerConnection sql = new SqlServerConnection();
+            Connection con = sql.connect("localhost:33060");
 
-        Scanner sc = new Scanner(System.in);
-        int index = 0;
-        int n = 0;
-        boolean exit = false;
-        RequirementsSQL requirements = new RequirementsSQL();
-        List<String> requirementsList;
-        requirementsList = requirements.reportRequirements();
-        SqlServerConnection sql = new SqlServerConnection();
-        Connection con = sql.connect("localhost:33060");
+            while (!exit) {
 
-        while (!exit) {
+                for (String s : requirementsList) {
+                    System.out.println(requirementsList.indexOf(s) + 1 + ") " + s);
+                }
+                System.out.print("\nSelect Report to be Generated, (or 0 to exit): ");
+                index = sc.nextInt();
+                System.out.print("If applicable, enter the value for N: ");
+                n = sc.nextInt();
 
-            for (String s : requirementsList) {
-                System.out.println(requirementsList.indexOf(s) + 1 + ") " + s);
             }
-            System.out.print("\nSelect Report to be Generated, (or 0 to exit): ");
-            index = sc.nextInt();
-            System.out.print("If applicable, enter the value for N: ");
-            n = sc.nextInt();
 
         }
-
-
+        catch (Exception e){
+            return -1;
+        }
+        return 0;
     }
 
 

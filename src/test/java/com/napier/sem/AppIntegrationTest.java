@@ -8,7 +8,12 @@ import java.util.List;
 import static org.junit.jupiter.api.Assertions.assertEquals;
 
 public class AppIntegrationTest {
+    @Test
+    void run_app_null_test(){
+        //arrange
 
+        assertEquals(5,5);
+    }
 
 
 }
