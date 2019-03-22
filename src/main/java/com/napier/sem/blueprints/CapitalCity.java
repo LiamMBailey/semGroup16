@@ -1,4 +1,4 @@
-package com.napier.sem;
+package com.napier.sem.blueprints;
 
 public class CapitalCity
 {
@@ -12,6 +12,7 @@ public class CapitalCity
         _capitalCityCountry = capitalCityCountry;
         _capitalCityPopulation = capitalCityPopulation;
     }
+    public CapitalCity(){}
 
     // Getter and setter for Name
     public String getCapitalCityName() {

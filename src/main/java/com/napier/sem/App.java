@@ -15,18 +15,13 @@ public class App {
         Scanner sc = new Scanner(System.in);
         int index = 0;
         int n = 0;
-        Boolean exit = false;
+        boolean exit = false;
         RequirementsSQL requirements = new RequirementsSQL();
         List<String> requirementsList;
         requirementsList = requirements.reportRequirements();
         SqlServerConnection sql = new SqlServerConnection();
-        Connection con = sql.connect("localhost:3360");
+        Connection con = sql.connect("localhost:33060");
 
-
-
-        SqlStatements sqlStmt = new SqlStatements();
-
-        sql.connect("localhost:33060");
         while (!exit) {
 
             for (String s : requirementsList) {

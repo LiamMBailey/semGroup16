@@ -1,4 +1,4 @@
-package com.napier.sem;
+package com.napier.sem.blueprints;
 
 public class City {
 
@@ -14,7 +14,9 @@ public class City {
         _cityDistrict = cityDistrict;
         _cityPopulation = cityPopulation;
     }
+    public City(){
 
+    }
     // Getter and setter for Name
     public String getCityName() {
         return _cityName;
