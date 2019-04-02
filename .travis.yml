@@ -1,38 +1,34 @@
 language: java
-
 sudo: false
-
 addons:
   hosts:
-    - db
-
+  - db
 services:
-  - docker
-
+- docker
 install:
-  - docker build -t database db/.
-  - docker run --rm -d -e MYSQL_ROOT_PASSWORD=Semgroup16 -p 33060:3306 database
-  - mvn install -DskipTests=true -Dmaven.javadoc.skip=true -B -V
-
+- docker build -t database db/.
+- docker run --rm -d -e MYSQL_ROOT_PASSWORD=Semgroup16 -p 33060:3306 database
+- mvn install -DskipTests=true -Dmaven.javadoc.skip=true -B -V
 before_script:
-  - mvn clean
-
+- mvn clean
 jobs:
   include:
-    - stage: unit tests
-      install: skip
-      jdk: oraclejdk11
-      script: mvn test -Dtest=com.napier.sem.UnitTests
-    - stage: integration tests
-      jdk: oraclejdk11
-      script: mvn test -Dtest=com.napier.sem.AppIntegrationTest
-    - stage: deploy
-      install: skip
-      jdk: oraclejdk11
-      script: echo "Deploy"
-
+  - stage: unit tests
+    install: skip
+    jdk: oraclejdk11
+    script: mvn test -Dtest=com.napier.sem.UnitTests
+  - stage: integration tests
+    jdk: oraclejdk11
+    script: mvn test -Dtest=com.napier.sem.AppIntegrationTest
+  - stage: deploy
+    install: skip
+    jdk: oraclejdk11
+    script: echo "Deploy"
 stages:
-  - unit tests
-  - integration tests
-  - name: deploy
-    if: branch = master
+- unit tests
+- integration tests
+- name: deploy
+  if: branch = master
+before_install:
+- openssl aes-256-cbc -K $encrypted_5eb16036fc02_key -iv $encrypted_5eb16036fc02_iv
+  -in client-secret.json.enc -out client-secret.json -d
