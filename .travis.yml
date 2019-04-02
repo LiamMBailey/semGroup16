@@ -13,6 +13,7 @@ before_script:
 - mvn clean
 jobs:
   include:
+<<<<<<< HEAD
   - stage: unit tests
     install: skip
     jdk: oraclejdk11
@@ -32,3 +33,41 @@ stages:
 before_install:
 - openssl aes-256-cbc -K $encrypted_5eb16036fc02_key -iv $encrypted_5eb16036fc02_iv
   -in client-secret.json.enc -out client-secret.json -d
+=======
+    - stage: unit tests
+      install: skip
+      jdk: oraclejdk11
+      script: mvn test -Dtest=com.napier.sem.UnitTests
+    - stage: integration tests
+      jdk: oraclejdk11
+      script: mvn test -Dtest=com.napier.sem.AppIntegrationTest
+    - stage: deploy
+      install: skip
+      jdk: oraclejdk11
+      script:
+        - echo "Deploying to GitHub Releases"
+        - mvn package -DskipTests=true -Dmaven.javadoc.skip=true
+      before_deploy:
+        # Set up git user name and tag this commit
+        - git config --local user.name "LiamMBailey"
+        - git config --local user.email "40316961@live.napier.ac.uk"
+        # Create temporary tag from date and Git log.
+        - export TRAVIS_TAG=${TRAVIS_TAG:-$(date +'%Y-%m-%d')-$(git log --format=%h -1)}
+        # Set tag
+        - git tag $TRAVIS_TAG
+      deploy:
+        provider: releases
+        api_key: $GITHUB_OAUTH_TOKEN
+        # Copy built JAR file.  JAR built in $TRAVIS_BUILD_DIR/
+        file: $TRAVIS_BUILD_DIR/target/seMethods.jar
+        skip_cleanup: true
+
+stages:
+  - unit tests
+  - integration tests
+  - name: GitHub Release
+    if: branch = master
+
+after_success:
+  - bash <(curl -s https://codecov.io/bash)
+>>>>>>> d70a00f9f1e5e6fcf59b877b8069bafc868c9e19
