@@ -23,7 +23,6 @@ before_script:
 
 jobs:
   include:
-<<<<<<< HEAD
   - stage: unit tests
     install: skip
     jdk: oraclejdk11
