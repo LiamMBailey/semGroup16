@@ -19,7 +19,7 @@ public class App {
         {
             a.run_app(args[0]);
         }
-      a.run_app();
+
 
     }
     public int run_app(String dbLocation){
