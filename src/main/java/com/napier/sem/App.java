@@ -11,10 +11,20 @@ public class App {
 
     public static void main(String[] args) {
       App a = new App();
+        if (args.length < 1)
+        {
+            a.run_app("localhost:3306");
+        }
+        else
+        {
+            a.run_app(args[0]);
+        }
       a.run_app();
 
     }
-    public int run_app(){
+    public int run_app(String dbLocation){
+
+
         try{
             Scanner sc = new Scanner(System.in);
             int index = 0;
@@ -24,7 +34,7 @@ public class App {
             List<String> requirementsList;
             requirementsList = requirements.reportRequirements();
             SqlServerConnection sql = new SqlServerConnection();
-            Connection con = sql.connect("localhost:33060");
+            Connection con = sql.connect(dbLocation);
 
             while (!exit) {
 
