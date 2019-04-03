@@ -3,17 +3,12 @@ package com.napier.sem;
 
 import com.napier.sem.sqlserver.RequirementsSQL;
 import com.napier.sem.sqlserver.SqlServerConnection;
-import org.springframework.boot.SpringApplication;
-import org.springframework.boot.autoconfigure.SpringBootApplication;
-import org.springframework.web.bind.annotation.RestController;
 
 import java.sql.Connection;
 import java.util.List;
 import java.util.Scanner;
 import java.io.Console;
 
-@SpringBootApplication
-@RestController
 public class App {
 
     public static void main(String[] args) {
