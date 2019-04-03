@@ -9,6 +9,7 @@ addons:
 env:
   global:
     - CLOUDSDK_CORE_DISABLE_PROMPTS=1
+    -CODECOV_TOKEN="71db3f0e-8123-444b-a655-4dc59c8cb407"
 
 services:
 - docker
