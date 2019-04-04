@@ -3,6 +3,7 @@ package com.napier.sem;
 
 import com.napier.sem.sqlserver.RequirementsSQL;
 import com.napier.sem.sqlserver.SqlServerConnection;
+import org.springframework.boot.SpringApplication;
 
 import java.sql.Connection;
 import java.util.List;
