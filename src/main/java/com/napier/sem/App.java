@@ -1,28 +1,37 @@
 package com.napier.sem;
 
+
 import com.napier.sem.sqlserver.RequirementsSQL;
 import com.napier.sem.sqlserver.SqlServerConnection;
+import org.springframework.boot.SpringApplication;
 
 import java.sql.Connection;
 import java.util.List;
 import java.util.Scanner;
+import java.io.Console;
 
 public class App {
 
     public static void main(String[] args) {
-      App a = new App();
+        Console c =System.console();
+
         if (args.length < 1)
         {
-            a.run_app("localhost:3306");
+            System.out.println("localhost.");
+          // run_app("localhost:3306");
         }
         else
         {
-            a.run_app(args[0]);
+            System.out.println(args[0]);
+            //run_app(args[0]);
         }
+
+        SpringApplication.run(App.class, args);
 
 
     }
-    public int run_app(String dbLocation){
+
+    public static int run_app(String dbLocation){
 
 
         try{
@@ -57,4 +66,5 @@ public class App {
 
 
 }
+
 
