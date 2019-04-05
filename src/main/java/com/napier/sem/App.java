@@ -14,7 +14,7 @@ public class App {
       a.run_app();
 
     }
-    public int run_app(){
+    private int run_app(){
         try{
             Scanner sc = new Scanner(System.in);
             int index = 0;
@@ -44,7 +44,5 @@ public class App {
         }
         return 0;
     }
-
-
 }
 
