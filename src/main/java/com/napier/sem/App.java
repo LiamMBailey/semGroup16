@@ -1,20 +1,39 @@
 package com.napier.sem;
 
+
 import com.napier.sem.sqlserver.RequirementsSQL;
 import com.napier.sem.sqlserver.SqlServerConnection;
+import org.springframework.boot.SpringApplication;
 
 import java.sql.Connection;
 import java.util.List;
 import java.util.Scanner;
+import java.io.Console;
 
 public class App {
 
     public static void main(String[] args) {
-      App a = new App();
-      a.run_app();
+        Console c =System.console();
+
+        if (args.length < 1)
+        {
+            System.out.println("localhost.");
+          // run_app("localhost:3306");
+        }
+        else
+        {
+            System.out.println(args[0]);
+            //run_app(args[0]);
+        }
+
+        SpringApplication.run(App.class, args);
+
 
     }
-    private int run_app(){
+
+    public static int run_app(String dbLocation){
+
+
         try{
             Scanner sc = new Scanner(System.in);
             int index = 0;
@@ -24,7 +43,7 @@ public class App {
             List<String> requirementsList;
             requirementsList = requirements.reportRequirements();
             SqlServerConnection sql = new SqlServerConnection();
-            Connection con = sql.connect("localhost:33060");
+            Connection con = sql.connect(dbLocation);
 
             while (!exit) {
 
@@ -44,5 +63,8 @@ public class App {
         }
         return 0;
     }
+
+
 }
+
 
