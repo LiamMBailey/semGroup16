@@ -1,14 +1,10 @@
 package com.napier.sem;
-
 import com.napier.sem.blueprints.City;
 import com.napier.sem.blueprints.Country;
 import com.napier.sem.sqlserver.RequirementsSQL;
-import com.napier.sem.sqlserver.SqlServerConnection;
 import com.napier.sem.sqlserver.SqlServerQuery;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
-
-import java.util.ArrayList;
 import java.util.List;
 
 @CrossOrigin

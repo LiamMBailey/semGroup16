@@ -39,6 +39,7 @@ public class SqlServerQuery {
     }
 
 
+    // A method that calls the database and returns the response as a list of strings
     public List<String> stringQuery(String sql) {
         List<String> serverResponse = new ArrayList<>();
         try {
@@ -62,12 +63,16 @@ public class SqlServerQuery {
         return serverResponse;
     }
 
+    // A method that calls the database and returns the response as a list of Country Objects
     public List<Country> CountryQuery(String sql) {
         List<Country> serverResponse = new ArrayList<>();
         try {
             Statement statement = con.createStatement();
             ResultSet rs = statement.executeQuery(sql);
+            //where the result set is not empty
             while (rs.next()) {
+
+                //build a new country object and set values
                 Country c = new Country();
                 String capital = null;
 
@@ -77,6 +82,7 @@ public class SqlServerQuery {
                 c.setCountryContinent(rs.getString("Continent"));
                 c.setCountryPopulation(Integer.parseInt(rs.getString("Population")));
                 try{
+                    //get capital city name from code
                     capital = stringQuery("SELECT name FROM city WHERE ID = " + rs.getString("Capital")).get(0);
                 }
                 catch (Exception e){
@@ -93,17 +99,23 @@ public class SqlServerQuery {
 
     }
 
+    // A method that calls the database and returns the response as a list of City Objects
     public List<City> cityQuery(String sql) {
         List<City> serverResponse = new ArrayList<>();
         try {
             Statement statement = con.createStatement();
             ResultSet rs = statement.executeQuery(sql);
+            //where the result set is not empty
+
             while (rs.next()) {
+
+                //build a new city object
                 City c = new City();
                 c.setCityName(rs.getString("Name"));
                 c.setCityDistrict(rs.getString("District"));
                 c.setCityPopulation(Integer.parseInt(rs.getString("Population")));
                 try {
+                    //get country name from code
                     String Country = stringQuery(String.format("SELECT name FROM country where Code = '%s'", rs.getString("CountryCode"))).get(0);
                     c.setCityCountry(Country);
                 }catch (Exception e){
@@ -119,7 +131,7 @@ public class SqlServerQuery {
 
         return serverResponse;
     }
-
+    // A method that calls the database and returns the response as a list of Capital City Objects
     public List<CapitalCity> capitalCityQuery(String sql) {
         List<CapitalCity> serverResponse = new ArrayList<>();
 
@@ -127,7 +139,9 @@ public class SqlServerQuery {
             Statement statement = con.createStatement();
             ResultSet rs = statement.executeQuery(sql);
 
+            //where the result set is not empty
             while (rs.next()) {
+                //build capital city object
                 CapitalCity c = new CapitalCity();
                 c.setCapitalCityName(rs.getString(1));
                 c.setCapitalCityCountry(rs.getString(2));
