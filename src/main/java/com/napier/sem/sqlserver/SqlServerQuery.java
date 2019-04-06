@@ -17,7 +17,7 @@ public class SqlServerQuery {
 
     @Autowired
     public SqlServerQuery(SqlServerConnection sqlServerConnection) {
-        String location = "35.242.179.110:3306";
+        String location = "35.242.185.153:3306";
 
         this.sqlServerConnection = sqlServerConnection;
         con = sqlServerConnection.connect(location);
@@ -131,6 +131,7 @@ public class SqlServerQuery {
 
         return serverResponse;
     }
+
     // A method that calls the database and returns the response as a list of Capital City Objects
     public List<CapitalCity> capitalCityQuery(String sql) {
         List<CapitalCity> serverResponse = new ArrayList<>();
@@ -155,6 +156,4 @@ public class SqlServerQuery {
         }
         return serverResponse;
     }
-
-
 }

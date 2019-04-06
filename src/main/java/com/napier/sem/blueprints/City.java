@@ -53,4 +53,8 @@ public class City {
         _cityPopulation = cityPopulation;
     }
 
+    public String toString(){
+        return String.format("%s, %s, %s, %s", _cityName,_cityCountry,_cityDistrict,_cityPopulation);
+    }
+
 }
