@@ -4,6 +4,9 @@ import com.napier.sem.blueprints.CapitalCity;
 import com.napier.sem.blueprints.City;
 import com.napier.sem.blueprints.Country;
 import com.napier.sem.blueprints.Population;
+import com.napier.sem.sqlserver.RequirementsSQL;
+import com.napier.sem.sqlserver.SqlServerConnection;
+import com.napier.sem.sqlserver.SqlServerQuery;
 import org.junit.jupiter.api.*;
 
 import static org.junit.jupiter.api.Assertions.*;
@@ -213,5 +216,31 @@ class UnitTests {
         String expectedString = "testName, 100, 60, 0.6, 40, 0.4";
 
         assertEquals(expectedString, sut.toString());
+    }
+
+
+    static SqlServerConnection sqlServerConnection;
+    static SqlServerQuery sqlServerQuery;
+    static RequirementsSQL requirementsSQL;
+    @BeforeAll
+    public static void innit(){
+        sqlServerConnection = new SqlServerConnection();
+        sqlServerQuery = new SqlServerQuery(sqlServerConnection);
+        requirementsSQL = new RequirementsSQL();
+    }
+    @Test
+    void AppController_ShouldBeCreated_NotNull(){
+        AppController sut  = new AppController(sqlServerQuery, requirementsSQL);
+        assertNotNull(sut);
+    }
+    @Test
+    void CountryQuery_Should_ReturnList(){
+        AppController sut  = new AppController(sqlServerQuery, requirementsSQL);
+        assertNotNull(sut.CountryQuery("0", "0", "Europe", "British Islands"));
+    }
+    @Test
+    void CityQuery_Should_ReturnList(){
+        AppController sut  = new AppController(sqlServerQuery, requirementsSQL);
+        assertNotNull(sut.CityQuery("0", "0","United Kingdom", "Scotland", "Europe", "British Islands"));
     }
 }
