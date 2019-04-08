@@ -1,4 +1,5 @@
 package com.napier.sem;
+import com.napier.sem.blueprints.Country;
 import com.napier.sem.sqlserver.RequirementsSQL;
 import com.napier.sem.sqlserver.SqlServerConnection;
 import com.napier.sem.sqlserver.SqlServerQuery;
@@ -70,6 +71,67 @@ public class AppIntegrationTest {
 
         //Assert
         assertEquals(expected.get(0),actual.get(0));
+    }
+
+    @Test
+    public void Country_List_Return_Test_Null(){
+        //Arrange
+        List<Country> actual;
+        List<Country> expected = new ArrayList<>();
+
+        //Act
+        actual =  sqlServerQuery.CountryQuery(null);
+
+        //Assert
+        assertEquals(expected,actual);
+    }
+
+    @Test
+    public void Country_List_Return_Test_Empty(){
+        //Arrange
+        List<Country> actual;
+        List<Country> expected = new ArrayList<>();
+
+        //Act
+        actual =  sqlServerQuery.CountryQuery("");
+
+        //Assert
+        assertEquals(expected,actual);
+    }
+
+    @Test
+    public void Country_List_Return_Test_Invalid(){
+        //Arrange
+        List<Country> actual;
+        List<Country> expected = new ArrayList<>();
+
+        //Act
+        actual =  sqlServerQuery.CountryQuery("From Country Select Name");
+
+        //Assert
+        assertEquals(expected,actual);
+    }
+
+    @Test
+    public void Country_List_Return_Test_Valid(){
+        //Arrange
+        List<Country> actual;
+        List<Country> expected = new ArrayList<>();
+        Country c = new Country();
+
+        //Act
+        actual =  sqlServerQuery.CountryQuery("Select * From country where name = 'United Kingdom'");
+        System.out.println(actual.get(0).toString());
+        c.setCountryCode("GBR");
+        c.setCountryName("United Kingdom");
+        c.setCountryContinent("Europe");
+        c.setCountryRegion("British Islands");
+        c.setCountryPopulation(59623400);
+        c.setCountryCapital("London");
+
+        expected.add(c);
+        //Assert
+        assertEquals(expected.get(0).toString(), actual.get(0).toString());
     }
 
 
