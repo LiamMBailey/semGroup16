@@ -54,7 +54,7 @@ public class AppController {
         String query = queries.get(Integer.parseInt(queryID));
 
 
-        
+
         query = query.replace("${CITYREPORT}", cityReport);
         query = query.replace("${COUNTRY}", Country);
         query = query.replace("${DISTRICT}", District);
