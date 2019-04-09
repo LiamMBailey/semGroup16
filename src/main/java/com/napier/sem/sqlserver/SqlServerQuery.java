@@ -17,7 +17,7 @@ public class SqlServerQuery {
 
     @Autowired
     public SqlServerQuery(SqlServerConnection sqlServerConnection) {
-        String location = "35.242.185.153:3306";
+        String location = "localhost:3065";
         this.sqlServerConnection = sqlServerConnection;
         con = sqlServerConnection.connect(location);
     }
