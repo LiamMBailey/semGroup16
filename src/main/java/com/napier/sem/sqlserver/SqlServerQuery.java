@@ -143,9 +143,15 @@ public class SqlServerQuery {
             while (rs.next()) {
                 //build capital city object
                 CapitalCity c = new CapitalCity();
-                c.setCapitalCityName(rs.getString(1));
-                c.setCapitalCityCountry(rs.getString(2));
-                c.setCapitalCityPopulation(Integer.parseInt(rs.getString(3)));
+                c.setCapitalCityName(rs.getString("Name"));
+                try {
+                    //get country name from code
+                    String Country = stringQuery(String.format("SELECT name FROM country where Code = '%s'", rs.getString("CountryCode"))).get(0);
+                    c.setCapitalCityCountry(Country);
+                }catch (Exception e){
+                    c.setCapitalCityCountry("No Data");
+                }
+                c.setCapitalCityPopulation(Integer.parseInt(rs.getString("Population")));
 
                 serverResponse.add(c);
             }
