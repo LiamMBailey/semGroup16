@@ -35,7 +35,7 @@ function setQuery() {
 
 function getCountryReport(queryprams, idx) {
     let messages = [];
-    const url = `http://localhost:8080:8080/api/CountryReport/${idx-1}/${queryprams}`;
+    const url = `http://localhost:8080/api/CountryReport/${idx-1}/${queryprams}`;
     fetch(url, {
         method: 'GET',
         headers: {
