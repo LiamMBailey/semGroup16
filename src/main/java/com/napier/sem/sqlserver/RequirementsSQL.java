@@ -1,11 +1,13 @@
 package com.napier.sem.sqlserver;
 
+import org.springframework.stereotype.Component;
+
 import java.io.BufferedReader;
 import java.io.FileReader;
 import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
-
+@Component
 public class RequirementsSQL {
 
     public  List<String> reportRequirements() {
@@ -15,8 +17,6 @@ public class RequirementsSQL {
         String fileName = "reportRequirements/requirements.txt";
         List<String> requirements = new ArrayList<>();
         try {
-
-            //br = new BufferedReader(new FileReader(FILENAME));
             fr = new FileReader(fileName);
             br = new BufferedReader(fr);
 
@@ -64,6 +64,5 @@ public class RequirementsSQL {
 
         return sqlStr;
     }
-
 
 }
