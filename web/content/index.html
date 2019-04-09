@@ -2,26 +2,68 @@
 <html lang="en">
 <head>
     <meta charset="UTF-8">
-
-    <title>Title</title>
-
-    <script src="https://code.jquery.com/jquery-3.2.1.min.js"></script>
-
+    <title>SEM Group 16</title>
+    <link rel="stylesheet" type="text/css" href="styles/style.css">
+    <script type="text/javascript" src="scripts/index.js"></script>
 </head>
 <body>
-<div class="mypanel"></div>
+<div class="header" id="myHeader">
+    <h2 align="left" style="font-family: 'Roboto-Light'">Sem Group 16 Project</h2>
+</div>
+<br>
+<div class="row">
+    <div class="column" style="width: 40%">
+        <select id = "reports" style="height: 40px;">
+            <option value="1">All the countries in the world organised by largest population to smallest.</option>
+            <option value="2">All the countries in a continent organised by largest population to smallest.</option>
+            <option value="3">All the countries in a region organised by largest population to smallest.</option>
+            <option value="4">The top N populated countries in the world where N is provided by the user.</option>
+            <option value="5">The top N populated countries in a continent where N is provided by the user.</option>
+            <option value="6">The top N populated countries in a region where N is provided by the user.</option>
+            <option value="7">All the cities in the world organised by largest population to smallest.</option>
+            <option value="8">All the cities in a continent organised by largest population to smallest.</option>
+            <option value="9">All the cities in a region organised by largest population to smallest.</option>
+            <option value="10">All the cities in a country organised by largest population to smallest.</option>
+            <option value="11">All the cities in a district organised by largest population to smallest.</option>
+            <option value="12">The top N populated cities in the world where N is provided by the user.</option>
+            <option value="13">The top N populated cities in a continent where N is provided by the user.</option>
+            <option value="14">The top N populated cities in a region where N is provided by the user.</option>
+            <option value="15">The top N populated cities in a country where N is provided by the user.</option>
+            <option value="16">The top N populated cities in a district where N is provided by the user.</option>
+            <option value="17">All the capital cities in the world organised by largest population to smallest.</option>
+            <option value="18">All the capital cities in a continent organised by largest population to smallest.</option>
+            <option value="19">All the capital cities in a region organised by largest to smallest.</option>
+            <option value="20">The top N populated capital cities in the world where N is provided by the user.</option>
+            <option value="21">The top N populated capital cities in a continent where N is provided by the user.</option>
+            <option value="22">The top N populated capital cities in a region where N is provided by the user.</option>
+            <option value="23">The population of people, people living in cities, and people not living in cities in each continent.</option>
+            <option value="24">The population of people, people living in cities, and people not living in cities in each region.</option>
+            <option value="25">The population of people, people living in cities, and people not living in cities in each country.</option>
+
+        </select>
+    </div>
+    <div class="column" style="width: 10%">
+        <textarea placeholder="Value for N" style="resize: none; height: 30px" id = "Nvalue"></textarea>
+    </div>
+    <div class="column" style="width: 10%">
+        <textarea placeholder="Continent" style="resize: none; height: 30px" id = "continent"></textarea>
+    </div>
+    <div class="column" style="width: 10%">
+        <textarea placeholder="Region" style="resize: none; height: 30px" id = "region"></textarea>
+    </div>
+    <div class="column" style="width: 10%">
+        <textarea placeholder="Country" style="resize: none; height: 30px" id = "country"></textarea>
+    </div>
+    <div class="column" style="width: 10%">
+        <textarea placeholder="District" style="resize: none; height: 30px" id = "district"></textarea>
+    </div>
+    <div class="column" style="width: 10%">
+        <button class="block" onclick="setQuery()">Submit</button>
+    </div>
+</div>
+
+
+<div id="table_field" style="overflow-y: auto;max-height: 80vh;"></div>
+
 </body>
-
-<script>
-    $.getJSON('http://time.jsontest.com', function(data) {
-
-        var text = `Date: ${data.date}<br>
-                    Time: ${data.time}<br>
-                    Unix time: ${data.milliseconds_since_epoch}`
-
-
-        $(".mypanel").html(text);
-    });
-</script>
-
 </html>

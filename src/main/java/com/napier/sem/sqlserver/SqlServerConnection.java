@@ -1,17 +1,20 @@
 package com.napier.sem.sqlserver;
+import org.springframework.stereotype.Component;
+
 import java.sql.*;
 
 /*
  * SQL SERVER SINGLETON CLASS
  * CONNECTS TO DOCKER DB
  */
+@Component
 public class SqlServerConnection{
     /*
      * Establishes the connection with the docker MYSQL DB
      * Access level public as connection may need to be terminated and recreated
      */
     public Connection connect(String location) {
-         Connection con = null;
+        Connection con = null;
         try {
             // Load Database driver
             Class.forName("com.mysql.cj.jdbc.Driver");
@@ -43,6 +46,7 @@ public class SqlServerConnection{
     /* A method to gracefully terminate the connection with the Connection
      * Access level public as connection may need to be terminated and recreated
      */
+
     public void Disconnect(Connection con) {
         if (con != null) {
             try {
@@ -55,4 +59,3 @@ public class SqlServerConnection{
     }
 
 }
-

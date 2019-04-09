@@ -50,19 +50,5 @@ public class RequirementsSQL {
         return requirements;
     }
 
-    public String SqlStatementReport(int index, int n){
-
-         String countryFields = "Code, Name, Continent, Region, Population, Capital";
-
-        String sqlStr = null;
-        switch (index){
-            case 1:
-                sqlStr = "SELECT Code, Name, Continent, Region, Population, Capital FROM country ORDER BY Population DESC";
-                break;
-
-        }
-
-        return sqlStr;
-    }
 
 }

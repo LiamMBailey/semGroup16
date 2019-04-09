@@ -41,4 +41,8 @@ public class CapitalCity
         _capitalCityPopulation = capitalCityPopulation;
     }
 
+    public String toString(){
+        return String.format("%s, %s, %s", _capitalCityName,_capitalCityCountry, _capitalCityPopulation);
+    }
+
 }
