@@ -1,5 +1,6 @@
 package com.napier.sem.blueprints;
 
+//population object class
 public class Population {
     private String Name;
     private int  TotalPopulation = 1;

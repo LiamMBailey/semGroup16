@@ -1,5 +1,7 @@
 package com.napier.sem.blueprints;
 
+
+//Capital City object class
 public class CapitalCity
 {
     private String _capitalCityName;

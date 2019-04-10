@@ -7,6 +7,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 import java.util.List;
 
+//The controller for the spring app. Handles all routes here
 @CrossOrigin
 @RestController
 public class AppController {
@@ -14,12 +15,14 @@ public class AppController {
     private final SqlServerQuery sqlServerQuery;
     private final RequirementsSQL requirementsSQL;
 
+    //creating instances of the sql statements and the server query
     @Autowired
     public AppController(SqlServerQuery sqlServerQuery, RequirementsSQL requirementsSQL) {
         this.sqlServerQuery = sqlServerQuery;
         this.requirementsSQL = requirementsSQL;
     }
 
+    //request mapping for the country reports, takes in a query id and a few optional request prams
     @RequestMapping(value = "/api/CountryReport/{queryID}", method = RequestMethod.GET)
     public List<Country> CountryQuery(@PathVariable String queryID,
                                       @RequestParam(value = "n", defaultValue = "0") String N,
@@ -29,12 +32,13 @@ public class AppController {
         List<String> queries = requirementsSQL.reportRequirements();
         String query = queries.get(Integer.parseInt(queryID));
 
-
+        //adding the optional prams to the sql statement, if provided
         query = query.replace("${COUNTRYREPORT}", countryReport);
         query = query.replace("${REGION}", Region);
         query = query.replace("${CONTINENT}", Continent);
         query = query.replace("${N}", N);
 
+        //Storing in a country object list and returning it as a JSON object
         List<Country> cl;
         System.out.println(query);
         cl = sqlServerQuery.CountryQuery(query);
@@ -42,6 +46,7 @@ public class AppController {
 
     }
 
+    //Request mapping for the city objects, takes in query id as well as optional requests
     @RequestMapping(value = "/api/CityReport/{queryID}", method = RequestMethod.GET)
     public List<City> CityQuery(@PathVariable String queryID,
                                 @RequestParam(value = "n", defaultValue = "0") String N,
@@ -54,7 +59,7 @@ public class AppController {
         String query = queries.get(Integer.parseInt(queryID));
 
 
-
+        //adding the optional prams to the sql statement, if provided
         query = query.replace("${CITYREPORT}", cityReport);
         query = query.replace("${COUNTRY}", Country);
         query = query.replace("${DISTRICT}", District);
@@ -62,6 +67,7 @@ public class AppController {
         query = query.replace("${CONTINENT}", Continent);
         query = query.replace("${N}", N);
 
+        //Storing in a City object list and returning it as a JSON object
         List<City> cl;
         System.out.println(query);
         cl = sqlServerQuery.cityQuery(query);

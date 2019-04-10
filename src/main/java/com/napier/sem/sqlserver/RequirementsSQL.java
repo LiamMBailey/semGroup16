@@ -10,8 +10,11 @@ import java.util.List;
 @Component
 public class RequirementsSQL {
 
+    //Class that loads SQL statements from a file and returns them as as list of strings
     public  List<String> reportRequirements() {
 
+
+        //buffered reader reading the file
         BufferedReader br = null;
         FileReader fr = null;
         String fileName = "reportRequirements/requirements.txt";
@@ -27,6 +30,7 @@ public class RequirementsSQL {
             }
 
         }
+        //handling exceptions
         catch (IOException e) {
 
             e.printStackTrace();
@@ -34,6 +38,7 @@ public class RequirementsSQL {
         }
         finally {
 
+            //closing the stream
             try {
                 if (fr != null) {
                     fr.close();

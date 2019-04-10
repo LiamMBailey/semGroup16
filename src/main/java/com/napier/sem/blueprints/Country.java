@@ -1,6 +1,6 @@
 package com.napier.sem.blueprints;
 
-
+//country object class
 public class Country  {
     private String countryCode;
     private String countryName;
