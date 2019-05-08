@@ -1,4 +1,5 @@
 package com.napier.sem;
+import com.napier.sem.blueprints.CapitalCity;
 import com.napier.sem.blueprints.City;
 import com.napier.sem.blueprints.Country;
 import com.napier.sem.sqlserver.RequirementsSQL;
@@ -64,6 +65,31 @@ public class AppController {
         List<City> cl;
         System.out.println(query);
         cl = sqlServerQuery.cityQuery(query);
+        return cl;
+
+    }
+    @RequestMapping(value = "/api/CapitalCityReport/{queryID}", method = RequestMethod.GET)
+    public List<CapitalCity> CapitalCityQuery(@PathVariable String queryID,
+                                @RequestParam(value = "n", defaultValue = "0") String N,
+                                @RequestParam(value = "country", defaultValue = "United Kingdom") String Country,
+                                @RequestParam(value = "district", defaultValue = "Scotland") String District,
+                                @RequestParam(value = "continent", defaultValue = "Europe") String Continent,
+                                @RequestParam(value = "region", defaultValue = "British Islands") String Region) {
+        String cityReport = "city.Name AS name, city.CountryCode as CountryCode, city.Population AS Population";
+        List<String> queries = requirementsSQL.reportRequirements();
+        String query = queries.get(Integer.parseInt(queryID));
+
+
+        query = query.replace("${CITYREPORT}", cityReport);
+        query = query.replace("${COUNTRY}", Country);
+        query = query.replace("${DISTRICT}", District);
+        query = query.replace("${REGION}", Region);
+        query = query.replace("${CONTINENT}", Continent);
+        query = query.replace("${N}", N);
+
+        List<CapitalCity> cl;
+        System.out.println(query);
+        cl = sqlServerQuery.capitalCityQuery(query);
         return cl;
 
     }

@@ -28,8 +28,11 @@ function setQuery() {
     if(reportIDX > 0 && reportIDX < 7){
         getCountryReport(queryprams, reportIDX);
     }
-    if(reportIDX > 6 && reportIDX < 23){
+    if(reportIDX > 6 && reportIDX < 17){
         getCityReport(queryprams, reportIDX);
+    }
+    if(reportIDX > 16 && reportIDX < 23){
+        getCapitalCityReport(queryprams, reportIDX);
     }
 }
 
@@ -72,6 +75,26 @@ function getCityReport(queryprams, idx) {
             alert(err);
         });
 
+
+}
+
+function getCapitalCityReport(queryprams, idx) {
+    let messages = [];
+    const url = `http://localhost:8080/api/CapitalCityReport/${idx-1}/${queryprams}`;
+    fetch(url, {
+        method: 'GET',
+        headers: {
+            'Content-Type': 'application/json',
+        }
+    }).then((res) => {
+        return res.json()
+    }).then(data => {
+        drawTable(data);
+
+    })
+        .catch((err) => {
+            alert(err);
+        });
 
 }
 
