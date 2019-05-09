@@ -3,6 +3,7 @@ package com.napier.sem.sqlserver;
 import com.napier.sem.blueprints.CapitalCity;
 import com.napier.sem.blueprints.City;
 import com.napier.sem.blueprints.Country;
+import com.napier.sem.blueprints.Population;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 
@@ -156,6 +157,34 @@ public class SqlServerQuery {
                 serverResponse.add(c);
             }
 
+        } catch (Exception e) {
+            System.out.println(e);
+        }
+        return serverResponse;
+    }
+
+    public List<Population> populationQuery(String sql) {
+        List<Population> serverResponse = new ArrayList<>();
+
+        try {
+            Statement statement = con.createStatement();
+            ResultSet rs = statement.executeQuery(sql);
+
+            //where the result set is not empty
+            while (rs.next()) {
+                //build capital city object
+                Population p = new Population();
+                int population = Integer.parseInt(rs.getString("totalPopulation"));
+                int cityPopulation = Integer.parseInt(rs.getString("cityPopulation"));
+                int notCityPopulation = Integer.parseInt(rs.getString("notCityPopulation"));
+                p.setName(rs.getString("Name"));
+                p.setTotalPopulation(population);
+                p.setPopulationInCities(cityPopulation);
+                p.setPopulationNotInCities(notCityPopulation);
+                p.setPopPercentageInCities((cityPopulation/population)*100);
+                p.setPopPercentageNotInCities((notCityPopulation/population)*100);
+                serverResponse.add(p);
+            }
         } catch (Exception e) {
             System.out.println(e);
         }

@@ -2,6 +2,7 @@ package com.napier.sem;
 import com.napier.sem.blueprints.CapitalCity;
 import com.napier.sem.blueprints.City;
 import com.napier.sem.blueprints.Country;
+import com.napier.sem.blueprints.Population;
 import com.napier.sem.sqlserver.RequirementsSQL;
 import com.napier.sem.sqlserver.SqlServerQuery;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -90,6 +91,18 @@ public class AppController {
         List<CapitalCity> cl;
         System.out.println(query);
         cl = sqlServerQuery.capitalCityQuery(query);
+        return cl;
+
+    }
+
+    @RequestMapping(value = "/api/CapitalCityReport/{queryID}", method = RequestMethod.GET)
+    public List<Population> CapitalCityQuery(@PathVariable String queryID) {
+        List<String> queries = requirementsSQL.reportRequirements();
+        String query = queries.get(Integer.parseInt(queryID));
+
+        List<Population> cl;
+        System.out.println(query);
+        cl = sqlServerQuery.populationQuery(query);
         return cl;
 
     }
