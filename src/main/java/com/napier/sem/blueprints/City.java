@@ -1,5 +1,6 @@
 package com.napier.sem.blueprints;
 
+//city object class
 public class City {
 
     private String _cityName;
@@ -51,6 +52,10 @@ public class City {
 
     public void setCityPopulation(int cityPopulation) {
         _cityPopulation = cityPopulation;
+    }
+
+    public String toString(){
+        return String.format("%s, %s, %s, %s", _cityName,_cityCountry,_cityDistrict,_cityPopulation);
     }
 
 }
