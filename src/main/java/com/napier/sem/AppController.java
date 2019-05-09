@@ -95,8 +95,8 @@ public class AppController {
 
     }
 
-    @RequestMapping(value = "/api/CapitalCityReport/{queryID}", method = RequestMethod.GET)
-    public List<Population> CapitalCityQuery(@PathVariable String queryID) {
+    @RequestMapping(value = "/api/PopulationReport/{queryID}", method = RequestMethod.GET)
+    public List<Population> PopulationQuery(@PathVariable String queryID) {
         List<String> queries = requirementsSQL.reportRequirements();
         String query = queries.get(Integer.parseInt(queryID));
 

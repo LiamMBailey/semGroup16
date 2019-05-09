@@ -34,6 +34,9 @@ function setQuery() {
     if(reportIDX > 16 && reportIDX < 23){
         getCapitalCityReport(queryprams, reportIDX);
     }
+    if(reportIDX > 22 && reportIDX < 26){
+        getCapitalCityReport(queryprams, reportIDX);
+    }
 }
 
 function getCountryReport(queryprams, idx) {
@@ -81,6 +84,25 @@ function getCityReport(queryprams, idx) {
 function getCapitalCityReport(queryprams, idx) {
     let messages = [];
     const url = `http://localhost:8080/api/CapitalCityReport/${idx-1}/${queryprams}`;
+    fetch(url, {
+        method: 'GET',
+        headers: {
+            'Content-Type': 'application/json',
+        }
+    }).then((res) => {
+        return res.json()
+    }).then(data => {
+        drawTable(data);
+
+    })
+        .catch((err) => {
+            alert(err);
+        });
+
+}
+function getPopulationReport(queryprams, idx) {
+    let messages = [];
+    const url = `http://localhost:8080/api/PopulationReport/${idx-1}`;
     fetch(url, {
         method: 'GET',
         headers: {
