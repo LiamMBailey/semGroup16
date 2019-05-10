@@ -1,8 +1,5 @@
 package com.napier.sem;
-import com.napier.sem.blueprints.CapitalCity;
-import com.napier.sem.blueprints.City;
-import com.napier.sem.blueprints.Country;
-import com.napier.sem.blueprints.Population;
+import com.napier.sem.blueprints.*;
 import com.napier.sem.sqlserver.RequirementsSQL;
 import com.napier.sem.sqlserver.SqlServerQuery;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -38,7 +35,6 @@ public class AppController {
         query = query.replace("${N}", N);
 
         List<Country> cl;
-        System.out.println(query);
         cl = sqlServerQuery.CountryQuery(query);
         return cl;
 
@@ -64,7 +60,6 @@ public class AppController {
         query = query.replace("${N}", N);
 
         List<City> cl;
-        System.out.println(query);
         cl = sqlServerQuery.cityQuery(query);
         return cl;
 
@@ -89,7 +84,6 @@ public class AppController {
         query = query.replace("${N}", N);
 
         List<CapitalCity> cl;
-        System.out.println(query);
         cl = sqlServerQuery.capitalCityQuery(query);
         return cl;
 
@@ -101,8 +95,30 @@ public class AppController {
         String query = queries.get(Integer.parseInt(queryID));
 
         List<Population> cl;
-        System.out.println(query);
         cl = sqlServerQuery.populationQuery(query);
+        return cl;
+
+    }
+
+    @RequestMapping(value = "/api/AdditionalReport/{queryID}", method = RequestMethod.GET)
+    public List<AdditionalReport> AdditionalQuery(@PathVariable String queryID,
+                                              @RequestParam(value = "n", defaultValue = "0") String N,
+                                              @RequestParam(value = "country", defaultValue = "United Kingdom") String Country,
+                                              @RequestParam(value = "district", defaultValue = "Scotland") String District,
+                                              @RequestParam(value = "continent", defaultValue = "Europe") String Continent,
+                                              @RequestParam(value = "region", defaultValue = "British Islands") String Region) {
+        List<String> queries = requirementsSQL.reportRequirements();
+        String query = queries.get(Integer.parseInt(queryID));
+        query = query.replace("${COUNTRYNAME}", Country);
+        query = query.replace("${DISTRICT}", District);
+        query = query.replace("${REGION}", Region);
+        query = query.replace("${CONTINENT}", Continent);
+        query = query.replace("${CITYNAME}", Continent);
+
+        System.out.println(query);
+        List<AdditionalReport> cl;
+        cl = sqlServerQuery.AdditionalQuery(query);
+        System.out.println(cl);
         return cl;
 
     }

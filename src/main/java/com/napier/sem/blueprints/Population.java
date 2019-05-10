@@ -2,14 +2,14 @@ package com.napier.sem.blueprints;
 
 public class Population {
     private String Name;
-    private int  TotalPopulation = 1;
+    private long TotalPopulation = 1;
     private int PopulationInCities;
     private double PopPercentageInCities;
     private int PopulationNotInCities;
     private double PopPercentageNotInCities;
 
 
-    public Population(String name, int totalPopulation, int populationInCities,double popPercentageInCities, int populationNotInCities, double popPercentageNotInCities) {
+    public Population(String name, long totalPopulation, int populationInCities,double popPercentageInCities, int populationNotInCities, double popPercentageNotInCities) {
         Name = name;
         TotalPopulation = totalPopulation;
         PopulationInCities = populationInCities;
@@ -36,7 +36,7 @@ public class Population {
         Name = name;
     }
 
-    public int getTotalPopulation() {
+    public long getTotalPopulation() {
         return TotalPopulation;
     }
 

@@ -1,9 +1,6 @@
 package com.napier.sem.sqlserver;
 
-import com.napier.sem.blueprints.CapitalCity;
-import com.napier.sem.blueprints.City;
-import com.napier.sem.blueprints.Country;
-import com.napier.sem.blueprints.Population;
+import com.napier.sem.blueprints.*;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 
@@ -18,7 +15,7 @@ public class SqlServerQuery {
 
     @Autowired
     public SqlServerQuery(SqlServerConnection sqlServerConnection) {
-        String location = "localhost:33060";
+        String location = "localhost:33065";
         this.sqlServerConnection = sqlServerConnection;
         con = sqlServerConnection.connect(location);
     }
@@ -177,17 +174,45 @@ public class SqlServerQuery {
                 int population = Integer.parseInt(rs.getString("totalPopulation"));
                 int cityPopulation = Integer.parseInt(rs.getString("cityPopulation"));
                 int notCityPopulation = Integer.parseInt(rs.getString("notCityPopulation"));
+                double tempPop = population;
+                double tempCityPop = cityPopulation;
+                double tempNotCityPop = notCityPopulation;
                 p.setName(rs.getString("Name"));
                 p.setTotalPopulation(population);
                 p.setPopulationInCities(cityPopulation);
                 p.setPopulationNotInCities(notCityPopulation);
-                p.setPopPercentageInCities((cityPopulation/population)*100);
-                p.setPopPercentageNotInCities((notCityPopulation/population)*100);
+                p.setPopPercentageInCities(Math.round((tempCityPop/tempPop)*100));
+                p.setPopPercentageNotInCities(Math.round((tempNotCityPop/tempPop)*100));
                 serverResponse.add(p);
             }
         } catch (Exception e) {
             System.out.println(e);
         }
+        return serverResponse;
+    }
+
+    public List<AdditionalReport> AdditionalQuery(String sql) {
+        List<AdditionalReport> serverResponse = new ArrayList<>();
+
+        try {
+            Statement statement = con.createStatement();
+            ResultSet rs = statement.executeQuery(sql);
+
+            //where the result set is not empty
+            while (rs.next()) {
+               AdditionalReport ar = new AdditionalReport();
+               try {
+                   ar.setPopulation(rs.getString("Population"));
+               }
+               catch (Exception e){
+                   System.out.println(e);
+               }
+                serverResponse.add(ar);
+            }
+        } catch (Exception e) {
+            System.out.println(e);
+        }
+
         return serverResponse;
     }
 }
