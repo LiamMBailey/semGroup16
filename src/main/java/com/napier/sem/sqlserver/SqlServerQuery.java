@@ -5,6 +5,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 
 import java.sql.*;
+import java.text.DecimalFormat;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -152,6 +153,7 @@ public class SqlServerQuery {
                 c.setCapitalCityPopulation(Integer.parseInt(rs.getString(3)));
 
                 serverResponse.add(c);
+                System.out.println(serverResponse);
             }
 
         } catch (Exception e) {
@@ -171,9 +173,10 @@ public class SqlServerQuery {
             while (rs.next()) {
                 //build capital city object
                 Population p = new Population();
-                int population = Integer.parseInt(rs.getString("totalPopulation"));
-                int cityPopulation = Integer.parseInt(rs.getString("cityPopulation"));
-                int notCityPopulation = Integer.parseInt(rs.getString("notCityPopulation"));
+                long population;
+                population = Long.parseLong(rs.getString("totalPopulation"));
+                long cityPopulation = Long.parseLong(rs.getString("cityPopulation"));
+                long notCityPopulation = Long.parseLong(rs.getString("notCityPopulation"));
                 double tempPop = population;
                 double tempCityPop = cityPopulation;
                 double tempNotCityPop = notCityPopulation;
@@ -181,11 +184,12 @@ public class SqlServerQuery {
                 p.setTotalPopulation(population);
                 p.setPopulationInCities(cityPopulation);
                 p.setPopulationNotInCities(notCityPopulation);
-                p.setPopPercentageInCities(Math.round((tempCityPop/tempPop)*100));
-                p.setPopPercentageNotInCities(Math.round((tempNotCityPop/tempPop)*100));
+                p.setPopPercentageInCities((tempCityPop/tempPop)*100.0);
+                p.setPopPercentageNotInCities((tempNotCityPop/tempPop)*100.0);
                 serverResponse.add(p);
             }
         } catch (Exception e) {
+            System.out.println("Error here");
             System.out.println(e);
         }
         return serverResponse;
@@ -202,9 +206,10 @@ public class SqlServerQuery {
             while (rs.next()) {
                AdditionalReport ar = new AdditionalReport();
                try {
-                   ar.setPopulation(rs.getString("Population"));
+                   ar.setPopulation(rs.getString("Population").toString());
                }
                catch (Exception e){
+                   System.out.println("Error here");
                    System.out.println(e);
                }
                 serverResponse.add(ar);

@@ -105,9 +105,9 @@ class ObjectTests {
         //Arrange
         String name;
         long totalPopulation;
-        int PopInCities;
+        long PopInCities;
         double PopPercentInCities;
-        int PopNotInCities;
+        long PopNotInCities;
         double PopPercentNotInCities;
 
         //act

@@ -83,6 +83,7 @@ public class AppController {
         query = query.replace("${CONTINENT}", Continent);
         query = query.replace("${N}", N);
 
+        System.out.println(query);
         List<CapitalCity> cl;
         cl = sqlServerQuery.capitalCityQuery(query);
         return cl;
