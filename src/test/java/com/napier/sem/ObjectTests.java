@@ -5,9 +5,6 @@ import com.napier.sem.blueprints.City;
 import com.napier.sem.blueprints.Country;
 import com.napier.sem.blueprints.Population;
 import org.junit.jupiter.api.Test;
-import org.junit.jupiter.api.*;
-
-import javax.validation.constraints.AssertTrue;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
 
@@ -107,10 +104,10 @@ class ObjectTests {
     void PopulationTest(){
         //Arrange
         String name;
-        int totalPopulation;
-        int PopInCities;
+        long totalPopulation;
+        long PopInCities;
         double PopPercentInCities;
-        int PopNotInCities;
+        long PopNotInCities;
         double PopPercentNotInCities;
 
         //act
@@ -119,8 +116,8 @@ class ObjectTests {
         c.setTotalPopulation(3000);
         c.setPopulationInCities(2000);
         c.setPopulationNotInCities(1000);
-        c.setPopPercentageInCities((2000.0/3000.0)*100);
-        c.setPopPercentageNotInCities((1000.0/3000.0)*100);
+        c.setPopPercentageInCities(0);
+        c.setPopPercentageNotInCities(0);
 
         name = c.getName();
         totalPopulation = c.getTotalPopulation();

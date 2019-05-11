@@ -13,13 +13,19 @@ select distinct ${CITYREPORT} from city order by city.population DESC limit ${N}
 select distinct ${CITYREPORT} from city join country on country.continent = "${CONTINENT}" where city.countrycode = country.code order by city.population DESC limit ${N}
 select distinct ${CITYREPORT} from city join country on country.region = "${REGION}" where city.countrycode = country.code order by city.population DESC  limit  ${N}
 select distinct ${CITYREPORT} from city join country on country.name = "${COUNTRY}" where city.countrycode = country.code order by city.population DESC  limit ${N}
-select distinct ${CITYREPORT} from city where district = "${DISTRICT" order by population DESC limit ${N}
+select distinct ${CITYREPORT} from city where district = "${DISTRICT}" order by population DESC limit ${N}
 select ${CITYREPORT} from city join country on city.id = country.capital order by city.population desc
 select ${CITYREPORT} from city join country on city.id = country.capital where country.continent = "${CONTINENT}" order by city.population desc
-select ${CITYREPORT} from city join country on city.id = country.capital where country.region = "${CONTINENT}" order by city.population desc
+select ${CITYREPORT} from city join country on city.id = country.capital where country.region = "${REGION}" order by city.population desc
 select ${CITYREPORT} from city join country on city.id = country.capital order by city.population desc limit ${N}
 select ${CITYREPORT} from city join country on city.id = country.capital where country.continent = "${CONTINENT}" order by city.population desc limit ${N}
 select ${CITYREPORT} from city join country on city.id = country.capital where country.region = "${REGION}" order by city.population desc limit ${N}
-select distinct country.continent ,sum(country.population), sum(city.population), ( sum(country.population) - sum(city.population) ) from city join country where city.countrycode = country.code group by country.continent
-select distinct country.region ,sum(country.population), sum(city.population), ( sum(country.population) - sum(city.population) ) from city join country where city.countrycode = country.code group by country.region
-select distinct country.name ,sum(country.population), sum(city.population), ( sum(country.population) - sum(city.population) ) from city join country where city.countrycode = country.code group by country.name
+select country.continent AS Name,sum(country.population) AS totalPopulation, sum(city.population) AS cityPopulation, ( sum(country.population) - sum(city.population))  AS NotCityPopulation from city join country where city.countrycode = country.code group by country.continent
+select country.region AS Name,sum(country.population) AS totalPopulation, sum(city.population) AS cityPopulation, ( sum(country.population) - sum(city.population))AS NotCityPopulation from city join country where city.countrycode = country.code group by country.region
+select country.name AS Name,sum(country.population) AS totalPopulation, sum(city.population) AS cityPopulation, ( sum(country.population) - sum(city.population) ) AS NotCityPopulation from city join country where city.countrycode = country.code group by country.name
+select sum(country.population) as Population from country
+select sum(country.population) as Population from country where country.continent = "${CONTINENT}"
+select sum(country.population) as Population from country where country.region = "${REGION}"
+select country.population as Population from country where country.name = "${COUNTRYNAME}"
+select sum(city.population) as Population from city where city.district = "${DISTRICT}"
+select city.population as Population from city where city.name = "${CITYNAME}"

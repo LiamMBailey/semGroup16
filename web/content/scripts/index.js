@@ -28,14 +28,23 @@ function setQuery() {
     if(reportIDX > 0 && reportIDX < 7){
         getCountryReport(queryprams, reportIDX);
     }
-    if(reportIDX > 6 && reportIDX < 23){
+    if(reportIDX > 6 && reportIDX < 17){
         getCityReport(queryprams, reportIDX);
+    }
+    if(reportIDX > 16 && reportIDX < 23){
+        getCapitalCityReport(queryprams, reportIDX);
+    }
+    if(reportIDX > 22 && reportIDX < 26){
+        getPopulationReport(queryprams, reportIDX);
+    }
+    if(reportIDX > 25 && reportIDX < 32){
+        getAdditionalReport(queryprams, reportIDX);
     }
 }
 
 function getCountryReport(queryprams, idx) {
     let messages = [];
-    const url = `http://${window.location.hostname}/api/CountryReport/${idx-1}/${queryprams}`;
+    const url = `http://localhost:8080/api/CountryReport/${idx-1}/${queryprams}`;
     fetch(url, {
         method: 'GET',
         headers: {
@@ -44,13 +53,11 @@ function getCountryReport(queryprams, idx) {
     }).then((res) => {
         return res.json()
     }).then(data => {
-
         drawTable(data);
 
     })
         .catch((err) => {
             alert(err);
-            console.log(err);
         });
 
 
@@ -58,7 +65,7 @@ function getCountryReport(queryprams, idx) {
 
 function getCityReport(queryprams, idx) {
     let messages = [];
-    const url = `http://${window.location.hostname}/api/CityReport/${idx-1}/${queryprams}`;
+    const url = `http://localhost:8080/api/CityReport/${idx-1}/${queryprams}`;
     fetch(url, {
         method: 'GET',
         headers: {
@@ -72,9 +79,67 @@ function getCityReport(queryprams, idx) {
     })
         .catch((err) => {
             alert(err);
-            console.log(err);
         });
 
+
+}
+
+function getCapitalCityReport(queryprams, idx) {
+    let messages = [];
+    const url = `http://localhost:8080/api/CapitalCityReport/${idx-1}/${queryprams}`;
+    fetch(url, {
+        method: 'GET',
+        headers: {
+            'Content-Type': 'application/json',
+        }
+    }).then((res) => {
+        return res.json()
+    }).then(data => {
+        drawTable(data);
+
+    })
+        .catch((err) => {
+            alert(err);
+        });
+
+}
+function getPopulationReport(queryprams, idx) {
+    let messages = [];
+    const url = `http://localhost:8080/api/PopulationReport/${idx-1}`;
+    fetch(url, {
+        method: 'GET',
+        headers: {
+            'Content-Type': 'application/json',
+        }
+    }).then((res) => {
+        return res.json()
+    }).then(data => {
+        drawTable(data);
+
+    })
+        .catch((err) => {
+            alert(err);
+        });
+
+}
+
+function getAdditionalReport(queryprams, idx) {
+    let messages = [];
+    const url = `http://localhost:8080/api/AdditionalReport/${idx-1}/${queryprams}`;
+    fetch(url, {
+        method: 'GET',
+        headers: {
+            'Content-Type': 'application/json',
+        }
+    }).then((res) => {
+        return res.json()
+    }).then(data => {
+        drawTable(data);
+
+    })
+        .catch((err) => {
+            alert(err);
+        });
 
 }
 

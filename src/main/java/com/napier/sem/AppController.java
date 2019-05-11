@@ -1,6 +1,5 @@
 package com.napier.sem;
-import com.napier.sem.blueprints.City;
-import com.napier.sem.blueprints.Country;
+import com.napier.sem.blueprints.*;
 import com.napier.sem.sqlserver.RequirementsSQL;
 import com.napier.sem.sqlserver.SqlServerQuery;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -40,7 +39,6 @@ public class AppController {
 
         //Storing in a country object list and returning it as a JSON object
         List<Country> cl;
-        System.out.println(query);
         cl = sqlServerQuery.CountryQuery(query);
         return cl;
 
@@ -69,8 +67,66 @@ public class AppController {
 
         //Storing in a City object list and returning it as a JSON object
         List<City> cl;
-        System.out.println(query);
         cl = sqlServerQuery.cityQuery(query);
+        return cl;
+
+    }
+    @RequestMapping(value = "/api/CapitalCityReport/{queryID}", method = RequestMethod.GET)
+    public List<CapitalCity> CapitalCityQuery(@PathVariable String queryID,
+                                @RequestParam(value = "n", defaultValue = "0") String N,
+                                @RequestParam(value = "country", defaultValue = "United Kingdom") String Country,
+                                @RequestParam(value = "district", defaultValue = "Scotland") String District,
+                                @RequestParam(value = "continent", defaultValue = "Europe") String Continent,
+                                @RequestParam(value = "region", defaultValue = "British Islands") String Region) {
+        String cityReport = "city.Name AS name, city.CountryCode as CountryCode, city.Population AS Population";
+        List<String> queries = requirementsSQL.reportRequirements();
+        String query = queries.get(Integer.parseInt(queryID));
+
+
+        query = query.replace("${CITYREPORT}", cityReport);
+        query = query.replace("${COUNTRY}", Country);
+        query = query.replace("${DISTRICT}", District);
+        query = query.replace("${REGION}", Region);
+        query = query.replace("${CONTINENT}", Continent);
+        query = query.replace("${N}", N);
+
+        System.out.println(query);
+        List<CapitalCity> cl;
+        cl = sqlServerQuery.capitalCityQuery(query);
+        return cl;
+
+    }
+
+    @RequestMapping(value = "/api/PopulationReport/{queryID}", method = RequestMethod.GET)
+    public List<Population> PopulationQuery(@PathVariable String queryID) {
+        List<String> queries = requirementsSQL.reportRequirements();
+        String query = queries.get(Integer.parseInt(queryID));
+
+        List<Population> cl;
+        cl = sqlServerQuery.populationQuery(query);
+        return cl;
+
+    }
+
+    @RequestMapping(value = "/api/AdditionalReport/{queryID}", method = RequestMethod.GET)
+    public List<AdditionalReport> AdditionalQuery(@PathVariable String queryID,
+                                              @RequestParam(value = "n", defaultValue = "0") String N,
+                                              @RequestParam(value = "country", defaultValue = "United Kingdom") String Country,
+                                              @RequestParam(value = "district", defaultValue = "Scotland") String District,
+                                              @RequestParam(value = "continent", defaultValue = "Europe") String Continent,
+                                              @RequestParam(value = "region", defaultValue = "British Islands") String Region) {
+        List<String> queries = requirementsSQL.reportRequirements();
+        String query = queries.get(Integer.parseInt(queryID));
+        query = query.replace("${COUNTRYNAME}", Country);
+        query = query.replace("${DISTRICT}", District);
+        query = query.replace("${REGION}", Region);
+        query = query.replace("${CONTINENT}", Continent);
+        query = query.replace("${CITYNAME}", Continent);
+
+        System.out.println(query);
+        List<AdditionalReport> cl;
+        cl = sqlServerQuery.AdditionalQuery(query);
+        System.out.println(cl);
         return cl;
 
     }

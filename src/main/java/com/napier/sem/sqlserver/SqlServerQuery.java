@@ -1,12 +1,11 @@
 package com.napier.sem.sqlserver;
 
-import com.napier.sem.blueprints.CapitalCity;
-import com.napier.sem.blueprints.City;
-import com.napier.sem.blueprints.Country;
+import com.napier.sem.blueprints.*;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 
 import java.sql.*;
+import java.text.DecimalFormat;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -17,7 +16,7 @@ public class SqlServerQuery {
 
     @Autowired
     public SqlServerQuery(SqlServerConnection sqlServerConnection) {
-        String location = "localhost:33060";
+        String location = "localhost:33065";
         this.sqlServerConnection = sqlServerConnection;
         con = sqlServerConnection.connect(location);
     }
@@ -143,7 +142,7 @@ public class SqlServerQuery {
             while (rs.next()) {
                 //build capital city object
                 CapitalCity c = new CapitalCity();
-                c.setCapitalCityName(rs.getString("Name"));
+                c.setCapitalCityName(rs.getString(1));
                 try {
                     //get country name from code
                     String Country = stringQuery(String.format("SELECT name FROM country where Code = '%s'", rs.getString("CountryCode"))).get(0);
@@ -151,14 +150,74 @@ public class SqlServerQuery {
                 }catch (Exception e){
                     c.setCapitalCityCountry("No Data");
                 }
-                c.setCapitalCityPopulation(Integer.parseInt(rs.getString("Population")));
+                c.setCapitalCityPopulation(Integer.parseInt(rs.getString(3)));
 
                 serverResponse.add(c);
+                System.out.println(serverResponse);
             }
 
         } catch (Exception e) {
             System.out.println(e);
         }
+        return serverResponse;
+    }
+
+    public List<Population> populationQuery(String sql) {
+        List<Population> serverResponse = new ArrayList<>();
+
+        try {
+            Statement statement = con.createStatement();
+            ResultSet rs = statement.executeQuery(sql);
+
+            //where the result set is not empty
+            while (rs.next()) {
+                //build capital city object
+                Population p = new Population();
+                long population;
+                population = Long.parseLong(rs.getString("totalPopulation"));
+                long cityPopulation = Long.parseLong(rs.getString("cityPopulation"));
+                long notCityPopulation = Long.parseLong(rs.getString("notCityPopulation"));
+                double tempPop = population;
+                double tempCityPop = cityPopulation;
+                double tempNotCityPop = notCityPopulation;
+                p.setName(rs.getString("Name"));
+                p.setTotalPopulation(population);
+                p.setPopulationInCities(cityPopulation);
+                p.setPopulationNotInCities(notCityPopulation);
+                p.setPopPercentageInCities((tempCityPop/tempPop)*100.0);
+                p.setPopPercentageNotInCities((tempNotCityPop/tempPop)*100.0);
+                serverResponse.add(p);
+            }
+        } catch (Exception e) {
+            System.out.println("Error here");
+            System.out.println(e);
+        }
+        return serverResponse;
+    }
+
+    public List<AdditionalReport> AdditionalQuery(String sql) {
+        List<AdditionalReport> serverResponse = new ArrayList<>();
+
+        try {
+            Statement statement = con.createStatement();
+            ResultSet rs = statement.executeQuery(sql);
+
+            //where the result set is not empty
+            while (rs.next()) {
+               AdditionalReport ar = new AdditionalReport();
+               try {
+                   ar.setPopulation(rs.getString("Population").toString());
+               }
+               catch (Exception e){
+                   System.out.println("Error here");
+                   System.out.println(e);
+               }
+                serverResponse.add(ar);
+            }
+        } catch (Exception e) {
+            System.out.println(e);
+        }
+
         return serverResponse;
     }
 }
