@@ -9,6 +9,8 @@ Group project for 2nd Year Students at Edinburgh Napier University.
 - Codecov Master [![codecov](https://codecov.io/gh/LiamMBailey/semGroup16/branch/master/graph/badge.svg)](https://codecov.io/gh/LiamMBailey/semGroup16)
 - Codecov Develop [![codecov](https://codecov.io/gh/LiamMBailey/semGroup16/branch/develop/graph/badge.svg)](https://codecov.io/gh/LiamMBailey/semGroup16)
 
+- 31 requirements of 32 have been implemented, which is 96.875%.
+
 |id |Name|Met|Screenshot|
 |---|:---:|:---:|---:|
 |1|All the countries in the world organised by largest population to smallest.|Yes|![](https://github.com/LiamMBailey/semGroup16/blob/master/screenshots/img1.png)|
@@ -42,4 +44,4 @@ Group project for 2nd Year Students at Edinburgh Napier University.
 |29|The population of a country.|Yes|![](https://github.com/LiamMBailey/semGroup16/blob/master/screenshots/img29.png)|
 |30|The population of a district.|Yes|![](https://github.com/LiamMBailey/semGroup16/blob/master/screenshots/img30.png)|
 |31|The population of a city.|Yes|![](https://github.com/LiamMBailey/semGroup16/blob/master/screenshots/img31.png)|
-|32|The number of people who speak: Chinese, English, Hindi, Spanish and Arabic from greatest number to smallest, including the percentage of the world population|N0|n/a|
+|32|The number of people who speak: Chinese, English, Hindi, Spanish and Arabic from greatest number to smallest, including the percentage of the world population|No|n/a|

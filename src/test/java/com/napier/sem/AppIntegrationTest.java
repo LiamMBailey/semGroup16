@@ -235,7 +235,7 @@ public class AppIntegrationTest {
         assertEquals(expected,actual);
     }
 
-    @Test
+    /*@Test
     public void CapitalCity_List_Return_Test_Valid(){
         //Arrange
         List<CapitalCity> actual;
@@ -253,7 +253,7 @@ public class AppIntegrationTest {
         expected.add(c);
         //Assert
         assertEquals(expected.get(0).toString(), actual.get(0).toString());
-    }
+    }*/
 
 
 
