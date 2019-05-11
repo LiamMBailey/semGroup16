@@ -11,7 +11,7 @@ Group project for 2nd Year Students at Edinburgh Napier University.
 
 |id |Name|Met|Screenshot|
 |---|:---:|:---:|---:|
-|1|All the countries in the world organised by largest population to smallest.|Yes||
+|1|All the countries in the world organised by largest population to smallest.|Yes|img1.png|
 |2|All the countries in a continent organised by largest population to smallest.|Yes||
 |3|All the countries in a region organised by largest population to smallest.|Yes||
 |4|The top N populated countries in the world where N is provided by the user.|Yes||
